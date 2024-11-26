@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int front = -1, rear = -1;
+    const int size = 10; 
+    string queue[size];
+    int choice;
+    string job;
+
+    while (true) {
+        cout << "\n1. Insert Job\n2. Delete Job\n3. Display Jobs\n4. Exit\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: { // Insert Job
+                if (rear == size - 1) {
+                    cout << "Queue overflow! Cannot add more jobs." << endl;
+                } else {
+                    cout << "Enter the job to insert: ";
+                    cin >> job;
+                    if (front == -1) front = 0; 
+                    queue[++rear] = job;
+                    cout << "Job successfully inserted!" << endl;
+                }
+                break;
+            }
+            
+            case 2: { // Delete Job
+                if (front == -1 || front > rear) {
+                    cout << "Queue underflow! No jobs to delete." << endl;
+                    front = rear = -1; // Reset queue
+                } else {
+                    cout << "Job \"" << queue[front++] << "\" successfully deleted!" << endl;
+                }
+                break;
+            }
+            case 3: { // Display Jobs
+                if (front == -1 || front > rear) {
+                    cout << "No jobs in the queue!" << endl;
+                } else {
+                    cout << "Jobs in the queue (front to rear): ";
+                    for (int i = front; i <= rear; i++) {
+                        cout << queue[i] << " ";
+                    }
+                    cout << endl;
+                }
+                break;
+            }
+            case 4: { // Exit
+                cout << "Exiting program." << endl;
+                return 0;
+            }
+            default:
+                cout << "Invalid input! Please try again." << endl;
+        }
+    }
+
+    return 0;
+}
